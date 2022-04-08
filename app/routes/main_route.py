@@ -3,7 +3,7 @@ from flask import Blueprint, render_template
 main_route = Blueprint("main_route", __name__)
 
 @main_route.route("/")
-@main_route.route('/index')
+@main_route.route('/main')
 def index():
     puctures = {
                 "contents": [
