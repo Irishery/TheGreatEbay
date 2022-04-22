@@ -15,7 +15,9 @@ def sign_up():
         if form.validate_on_submit():
             check_login = User.query.filter_by(login=form.login.data).first()
             
-            if not (form.name.data and form.login.data and form.password.data):
+            if not (form.first_name.data and form.last_name.data \
+                and form.login.data and form.password.data
+                and form.gender.data):
                 flash('Все поля должны быть заполнены')
                 return redirect(url_for('auth.sign_up'))
             
@@ -28,8 +30,11 @@ def sign_up():
                 return redirect(url_for('auth.sign_up'))
 
                 
-            user = User(name=form.name.data, login=form.login.data,
-                        password=form.password.data)
+            user = User(first_name=form.first_name.data,
+                        last_name=form.last_name.data,
+                        login=form.login.data,
+                        password=form.password.data,
+                        gender=form.gender.data)
             db.session.add(user)
             db.session.commit()
 
@@ -44,14 +49,14 @@ def sign_in():
     form = SignIn()
     if request.method == "POST":
         if form.validate_on_submit():
-            user = Manager.query.filter_by(login=form.login.data).first()
+            user = User.query.filter_by(login=form.login.data).first()
             if not user or not check_password_hash(user.password_hash,
                                                          form.password.data):
                 flash("Login or password is incorrect")
                 return redirect(url_for('auth.sign_in'))
             
             login_user(user, remember=form.remember.data)
-            return redirect(url_for("main_route.base"))
+            return redirect(url_for("main_route.index"))
     return render_template("authorization.html", title="authorization",
                                                  form=form, action="sign_in")
 

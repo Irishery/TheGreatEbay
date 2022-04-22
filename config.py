@@ -5,6 +5,7 @@ app_dir = os.path.abspath(os.path.dirname(__file__))
 class BaseConfig:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'A SECRET KEY'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    UPLOAD_FOLDER = os.environ.get('UPLOAD_FOLDER')
 
 
 class DevelopementConfig(BaseConfig):

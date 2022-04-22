@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="../static/css/cart.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<main class="page">
+	 	<section class="shopping-cart dark">
+	 		<div class="container">
+		        <div class="block-heading">
+		          <h2>Shopping Cart</h2>
+		          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+		        </div>
+		        <div class="content">
+	 				<div class="row">
+	 					<div class="col-md-12 col-lg-8">
+	 						<div class="items">
+                                {% for product, count in cart_products %}
+                                    <div class="product">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <img class="img-fluid mx-auto d-block image" src="{{ product.photo }}">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="info">
+                                                    <div class="row">
+                                                        <div class="col-md-5 product-name">
+                                                            <div class="product-name">
+                                                                <a href="#">{{ product.name }}</a>
+                                                                <div class="product-info">
+                                                                    <div>Category: <span class="value">{{ product.type }}</span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 quantity">
+                                                            <!-- <label for="quantity">Quantity:</label>
+                                                            <input id="quantity" type="number" value ="{{ count }}" class="form-control quantity-input"> -->
+                                                        </div>
+                                                        <div class="col-md-3 price">
+                                                            <span>${{ product.cost }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+				 			</div>
+			 			</div>
+			 			<div class="col-md-12 col-lg-4">
+			 				<div class="summary">
+			 					<h3>Summary</h3>
+			 					<div class="summary-item"><span class="text">Total</span><span class="price">${{ total }}</span></div>
+			 					<button type="button" id="checkout" class="btn btn-primary btn-lg btn-block">Checkout</button>
+				 			</div>
+			 			</div>
+		 			</div> 
+		 		</div>
+	 		</div>
+		</section>
+	</main>
+{% endblock %}
+
+
+{% block scripts %}
+<script type="module" src="../static/js/cart.js"></script>
+{% endblock %}
